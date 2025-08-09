@@ -42,8 +42,9 @@ const TaskFilter = () => {
 
     useEffect(() => {
         if (selectedProject) {
-            // fetchTasks();
+            fetchTasks();
         }
+        // eslint-disable-next-line
     }, [selectedProject]);
 
     return (selectedProject ?
