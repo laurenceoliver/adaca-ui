@@ -9,6 +9,7 @@ import {
     Button,
 } from "@mui/material";
 import dayjs from "dayjs";
+import {useTaskContext} from "../context/TaskContext";
 
 const statusLabels = {
     1: "Pending",
@@ -17,7 +18,10 @@ const statusLabels = {
 };
 
 const TaskDetailsDialog = ({ open, onClose, task }) => {
+    const { developers } = useTaskContext();
+
     if (!task) return null;
+
 
     return (
         <Dialog
@@ -31,11 +35,11 @@ const TaskDetailsDialog = ({ open, onClose, task }) => {
             <DialogContent dividers>
                 <Box display="flex" flexDirection="column" gap={2}>
                     <Typography>Priority: {task.priority}</Typography>
-                    <Typography>Assignee: {task.assignee?.developerName}</Typography>
+                    <Typography>Assignee: {developers.find(d => d.developerId === task.developerId)?.developerName}</Typography>
                     <Typography>
                         Due Date: {dayjs(task.dueDate).format("D MMMM YYYY")}
                     </Typography>
-                    <Typography>Status: {statusLabels[task.status] || "Unknown"}</Typography>
+                    <Typography>Status: {statusLabels[task.statusId] || "Unknown"}</Typography>
                 </Box>
             </DialogContent>
             <DialogActions>

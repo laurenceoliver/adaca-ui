@@ -5,12 +5,11 @@ import axios from "axios";
 import {useTaskContext} from "../context/TaskContext";
 
 const CreateTask = () => {
-    const { selectedProject } = useTaskContext();
+    const { selectedProject, developers, setDevelopers } = useTaskContext();
 
     const [name, setName] = useState('');
     const [dueDate, setDueDate] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [developers, setDevelopers] = useState([]);
     const [error, setError] = useState(null);
     const [assignee, setAssignee] = useState('');
     const [priority, setPriority] = useState('');
@@ -28,6 +27,7 @@ const CreateTask = () => {
                 setError('Failed to load projects');
                 setLoading(false);
             });
+        // eslint-disable-next-line
     }, []);
 
     const handleCreate = async () => {
@@ -43,8 +43,8 @@ const CreateTask = () => {
                 name,
                 priority,
                 dueDate: dueDate.format('YYYY-MM-DD'),
-                assignee: { developerId: assignee },
-                status: 1,
+                developerId: assignee,
+                statusId: 1,
             });
 
             alert('Task created successfully');

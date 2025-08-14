@@ -14,7 +14,7 @@ const TaskList = ({ status, tasks, onTaskClick }) => (
         <Box display="flex" gap={2} flexDirection="column">
             <Typography variant="h6">{statusLabels[status]}</Typography>
             {tasks
-                .filter((task) => task.status === status)
+                .filter((task) => task.statusId === status)
                 .map((task) => (
                     <Card key={task.id}>
                         <CardActionArea onClick={() => onTaskClick(task)}>
